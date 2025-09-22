@@ -1,0 +1,18 @@
+export default {
+  async fetch(request) {
+    const url = "https://aetophisn8n.app.n8n.cloud/webhook/gtm-intake";
+    const init = {
+      method: request.method,
+      headers: { "Content-Type": "application/json" },
+      body: await request.text(),
+    };
+    const response = await fetch(url, init);
+    return new Response(await response.text(), {
+      headers: {
+        "Access-Control-Allow-Origin": "*", // allow any domain
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
+    });
+  }
+};
